@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mouse Shadow</title>
 </head>
 <body>
@@ -10,10 +11,16 @@
     <h1 contenteditable>🔥WOAH!</h1>
   </div>
 
+  <div class="circle-container">
+    <div class="circle"></div>
+  </div>
+
   <style>
   html {
-    color: black;
+    color: #000000;
+    background-color: #ededed;
     font-family: sans-serif;
+    overflow: hidden;
   }
 
   body {
@@ -25,12 +32,42 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: black;
+    color: #ffcc32;
   }
 
   h1 {
     text-shadow: 10px 10px 0 rgba(0,0,0,1);
-    font-size: 100px;
+    font-size: 5rem;
+  }
+
+  .circle{
+    position: absolute;
+    width: 400px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    filter: blur(100px);
+    z-index: 1;
+    border: solid 150vw #000;
+    pointer-events: none;
+  }
+  .circle-container{
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  @media (max-width: 768px) {
+    h1{
+      font-size: 4rem;
+    }
+    .circle{
+      width: 250px;
+      border-width: 150vh;
+    }
   }
   </style>
 
