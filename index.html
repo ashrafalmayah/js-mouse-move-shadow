@@ -8,14 +8,22 @@
 <body>
 
   <div class="hero">
+    <div class="filters">
+      <button data-filtername="blur">Blur</button>
+      <button data-filtername="flashlight">Flashlight</button>
+    </div>
     <h1 contenteditable>🔥WOAH!</h1>
   </div>
 
-  <div class="circle-container">
-    <div class="circle"></div>
-  </div>
+  <div class="circle flashlight"></div>
 
   <style>
+    :root{
+      --circle-width: 250px;
+      --circleX: 50vw;
+      --circleY: 50vh;
+    }
+  
   html {
     color: #000000;
     background-color: #ededed;
@@ -30,11 +38,24 @@
   .hero {
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     color: #ffcc32;
   }
 
+  button{
+    background: none;
+    border-radius: .5em;
+    padding: 1em;
+    font-size: 1rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  button:hover{
+    background-color: #ffffff;
+  }
   h1 {
     text-shadow: 10px 10px 0 rgba(0,0,0,1);
     font-size: 5rem;
@@ -42,31 +63,27 @@
 
   .circle{
     position: absolute;
-    width: 400px;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    filter: blur(100px);
-    z-index: 1;
-    border: solid 150vw #000;
+    inset: 0;
+    z-index: 999;
     pointer-events: none;
   }
-  .circle-container{
-    position: absolute;
-    height: 100vh;
-    width: 100vw;
-    top: 0;
-    left: 0;
-    overflow: hidden;
-    pointer-events: none;
+  .circle.flashlight{
+    -webkit-mask: radial-gradient( circle var(--circle-width) at var(--circleX) var(--circleY), transparent 50%, rgba(0,0,0,20%) 60%, black 110%);
+    mask: radial-gradient( circle var(--circle-width) at var(--circleX) var(--circleY), transparent 50%, rgba(0,0,0,20%) 60%, black 110%);
+    background-color: #000000;
+  }
+  .circle.blur{
+    background-color: #ffffff50;
+    -webkit-mask: radial-gradient( circle var(--circle-width) at var(--circleX) var(--circleY), transparent 80%, black 90%);
+    mask: radial-gradient( circle var(--circle-width) at var(--circleX) var(--circleY), transparent 80%, black 90%);
+    backdrop-filter: blur(10px);
   }
   @media (max-width: 768px) {
     h1{
       font-size: 4rem;
     }
     .circle{
-      width: 250px;
-      border-width: 150vh;
+      --circle-width: 150px;
     }
   }
   </style>
